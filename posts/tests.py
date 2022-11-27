@@ -16,14 +16,9 @@ class PostTests(TestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
 
-    def test_url_available_by_name(self): # new
+    def test_homepage(self):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
-
-    def test_template_name_correct(self): # new
-        response = self.client.get(reverse("home"))
         self.assertTemplateUsed(response, "home.html")
+        self.assertContains(response, "This is a test")
 
-    def test_template_content(self): # new
-        response = self.client.get(reverse("home"))
-        self.assertContains(response, "This is a test!")
